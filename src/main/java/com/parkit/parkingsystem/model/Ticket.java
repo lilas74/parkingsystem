@@ -1,9 +1,11 @@
 package com.parkit.parkingsystem.model;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class Ticket {
+
+
+    private boolean isRecurrentUser;
     private int id;
     private ParkingSpot parkingSpot;
     private String vehicleRegNumber;
@@ -40,7 +42,7 @@ public class Ticket {
     }
 
     public void setPrice(double price) {
-        this.price = Math.round(price*100.0)/100.0;
+        this.price = Math.round(price * 100.0) / 100.0;
     }
 
     public Date getInTime() {
@@ -57,5 +59,13 @@ public class Ticket {
 
     public void setOutTime(Date outTime) {
         this.outTime = outTime;
+    }
+
+    public boolean getRecurrentUser() {
+        return isRecurrentUser;
+    }
+
+    public void setRecurrentUser(boolean recurrentUser) {
+        isRecurrentUser = recurrentUser;
     }
 }
