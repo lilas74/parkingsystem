@@ -23,6 +23,10 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * The type Parking data base it.
+ * @author lilas
+ */
 @ExtendWith( MockitoExtension.class )
 public class ParkingDataBaseIT {
 
@@ -36,6 +40,9 @@ public class ParkingDataBaseIT {
     private static TicketDAO ticketDAO;
     @Spy
     private static ParkingSpotDAO parkingSpotDAO;
+    /**
+     * The Parking service.
+     */
     ParkingService parkingService;
 
     @BeforeAll
@@ -59,6 +66,11 @@ public class ParkingDataBaseIT {
         dataBasePrepareService.clearDataBaseEntries();
     }
 
+    /**
+     * Test parking a car.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testParkingACar() throws Exception {
         /**
@@ -91,9 +103,13 @@ public class ParkingDataBaseIT {
         verify(parkingSpotDAO, Mockito.times(1)).updateParking(any(ParkingSpot.class));
 
         //TODO: check that a ticket is actually saved in DB and Parking table is updated with availability
-
     }
 
+    /**
+     * Test parking lot exit.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testParkingLotExit() throws Exception {
         /**
@@ -115,7 +131,7 @@ public class ParkingDataBaseIT {
         assertEquals(Fare.CAR_RATE_PER_HOUR, ticket.getPrice());
         /*******************Time-Out****/
         assertNotNull(ticket.getOutTime());
-        
+
         //TODO: check that the fare generated and out time are populated correctly in the database
 
     }
