@@ -30,7 +30,7 @@ public class TicketTest {
     @Test
     public void testTicket() {
         /**
-        Given Initialized Ticket.
+        * Given Initialized Ticket.
         */
         ticket = new Ticket();
         Date inTime = new Date();
