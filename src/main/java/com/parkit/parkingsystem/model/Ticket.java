@@ -66,6 +66,6 @@ public class Ticket {
     }
 
     public void setRecurrentUser(boolean recurrentUser) {
-        isRecurrentUser = recurrentUser;
+        this.isRecurrentUser = recurrentUser;
     }
 }
