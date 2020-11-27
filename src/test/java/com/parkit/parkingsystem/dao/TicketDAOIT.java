@@ -57,13 +57,6 @@ class TicketDAOIT {
        assertEquals(0.0,getTicketSaved.getPrice());
        assertNotNull(getTicketSaved.getInTime());
        assertNotNull(getTicketSaved.getOutTime());
-
-
-
-
-
-
-
     }
 
     @Test

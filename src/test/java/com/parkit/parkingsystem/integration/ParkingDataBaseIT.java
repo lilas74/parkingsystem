@@ -1,4 +1,5 @@
-package com.parkit.parkingsystem.service;
+package com.parkit.parkingsystem.integration;
+
 
 import com.parkit.parkingsystem.constants.Fare;
 import com.parkit.parkingsystem.dao.ParkingSpotDAO;
@@ -7,6 +8,7 @@ import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
 import com.parkit.parkingsystem.integration.service.DataBasePrepareService;
 import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
+import com.parkit.parkingsystem.service.ParkingService;
 import com.parkit.parkingsystem.util.InputReaderUtil;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,7 +21,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,7 +32,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith( MockitoExtension.class )
 public class ParkingDataBaseIT {
 
-    private static DataBaseTestConfig dataBaseTestConfig = new DataBaseTestConfig();
+    private static  DataBaseTestConfig dataBaseTestConfig = new DataBaseTestConfig();
 
 
     private static DataBasePrepareService dataBasePrepareService;
@@ -56,7 +58,7 @@ public class ParkingDataBaseIT {
 
     @AfterAll
     private static void tearDown() {
-
+        dataBasePrepareService.clearDataBaseEntries();
     }
 
     @BeforeEach
@@ -76,7 +78,7 @@ public class ParkingDataBaseIT {
         /**
          * Given a new parking service
          */
-        ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+         parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
 
         /**
          * When an incoming vehicle process is called
@@ -116,10 +118,11 @@ public class ParkingDataBaseIT {
          * Given a new parking service
          */
         testParkingACar();
-        ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+         parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         /**
          * When the exiting process is called
          */
+        Thread.sleep(1000);
         parkingService.processExitingVehicle();
         /**
          * Then : check that the fare generated and out time are populated correctly in the database
@@ -132,8 +135,14 @@ public class ParkingDataBaseIT {
         /*******************Time-Out****/
         assertNotNull(ticket.getOutTime());
 
+
         //TODO: check that the fare generated and out time are populated correctly in the database
 
-    }
 
+    }
+    @Test
+    public void testReccurentUserExiting_true() {}
+
+    @Test
+    public void testReccurentUserExiting_false(){}
 }
