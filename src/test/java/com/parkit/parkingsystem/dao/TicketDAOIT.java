@@ -59,7 +59,7 @@ class TicketDAOIT {
        assertNotNull(getTicketSaved.getOutTime());
 
 
-      
+
 
 
 
