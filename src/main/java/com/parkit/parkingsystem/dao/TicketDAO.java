@@ -59,7 +59,7 @@ public class TicketDAO {
                 ticket.setPrice(rs.getDouble(3));
                 ticket.setInTime(rs.getTimestamp(4));
                 ticket.setOutTime(rs.getTimestamp(5));
-
+            System.out.println(ticket.getId());
 
             }
             dataBaseConfig.closeResultSet(rs);
@@ -74,14 +74,13 @@ public class TicketDAO {
 
    public boolean updateTicket(Ticket ticket) {
         Connection con = null;
-
         try {
             con = dataBaseConfig.getConnection();
-            PreparedStatement ps = con.prepareStatement(DBConstants.UPDATE_TICKET);
+            PreparedStatement ps = con.prepareStatement(DBConstants.UPDATE_TICKET2);
             ps.setDouble(1, ticket.getPrice());
-            ps.setTimestamp(2, new Timestamp(ticket.getInTime().getTime()));
-            ps.setTimestamp(3, new Timestamp(ticket.getOutTime().getTime()));
-            ps.setInt(4, ticket.getId());
+            ps.setTimestamp(2, new Timestamp(ticket.getOutTime().getTime()));
+            ps.setInt(3, ticket.getId());
+
             ps.execute();
             return true;
         } catch (Exception ex) {
