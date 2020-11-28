@@ -32,7 +32,6 @@ public class TicketDAO {
             ps.setTimestamp(4, new Timestamp(ticket.getInTime().getTime()));
             ps.setTimestamp(5,
                     (ticket.getOutTime() == null) ? null : new Timestamp(ticket.getOutTime().getTime()));
-            System.out.println(ticket.getId());
             return ps.execute();
         } catch (Exception ex) {
             logger.error("Error fetching next available slot", ex);
@@ -73,17 +72,16 @@ public class TicketDAO {
         }
     }
 
-    public boolean updateTicket(Ticket ticket) {
+   public boolean updateTicket(Ticket ticket) {
         Connection con = null;
+
         try {
             con = dataBaseConfig.getConnection();
             PreparedStatement ps = con.prepareStatement(DBConstants.UPDATE_TICKET);
             ps.setDouble(1, ticket.getPrice());
-            System.out.println(ticket.getInTime());
-            ps.setTimestamp(2, new Timestamp(ticket.getOutTime().getTime()));
-            ps.setInt(3, ticket.getId());
-            System.out.println(ticket.getId());
-
+            ps.setTimestamp(2, new Timestamp(ticket.getInTime().getTime()));
+            ps.setTimestamp(3, new Timestamp(ticket.getOutTime().getTime()));
+            ps.setInt(4, ticket.getId());
             ps.execute();
             return true;
         } catch (Exception ex) {
@@ -110,8 +108,8 @@ public class TicketDAO {
             }
             if ( count >= 1 ) {
                 reccurentUser = true;
-                ticket = new Ticket();
-                ticket.setRecurrentUser(reccurentUser);
+               /* ticket = new Ticket();
+                ticket.setRecurrentUser(reccurentUser);*/
             }
             dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
