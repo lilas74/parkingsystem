@@ -10,10 +10,7 @@ import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
 import com.parkit.parkingsystem.service.ParkingService;
 import com.parkit.parkingsystem.util.InputReaderUtil;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -73,6 +70,7 @@ public class ParkingDataBaseIT {
      *
      * @throws Exception the exception
      */
+    @DisplayName("Test the process of parking a car ")
     @Test
     public void testParkingACar() throws Exception {
         /**
@@ -89,19 +87,28 @@ public class ParkingDataBaseIT {
          * Then : check that a ticket is actually saved in DB and Parking table is updated with availability
          */
 
-        /*******************Ticket****/
+        /*******************************************************
+         /******************* Ticket ***************************
+         /******************************************************/
         Ticket ticket = ticketDAO.getTicket(inputReaderUtil.readVehicleRegistrationNumber());
         assertEquals(inputReaderUtil.readVehicleRegistrationNumber(), ticket.getVehicleRegNumber());
-        assertNotNull(ticket.getParkingSpot());
-        assertFalse(ticket.getParkingSpot().isAvailable());
-        assertNotNull(ticket);//generated ticket
+        assertNotNull(ticket.getParkingSpot(),
+                "Ticket doesn't save any parking spot");
+        assertFalse(ticket.getParkingSpot().isAvailable(),
+                "The parking table is not updated");
+        assertNotNull(ticket,
+                "Ticket is not save in the database");//generated ticket
         assertNotNull(ticket.getInTime());//getInTime saved
         verify(ticketDAO, Mockito.times(1)).saveTicket(any(Ticket.class));
 
-        /********************Parking Spot****/
+        /*******************************************************
+         /******************* Parking Spot *********************
+         /******************************************************/
         ParkingSpot parkingSpot = ticket.getParkingSpot();
-        assertNotNull(parkingSpot);
-        assertEquals(parkingSpot.isAvailable(), false);
+        assertNotNull(parkingSpot,
+                "Parking Spot is not generated");
+        assertEquals(parkingSpot.isAvailable(), false,
+                "The parking spot hasn't been updated with availability");
         verify(parkingSpotDAO, Mockito.times(1)).updateParking(any(ParkingSpot.class));
 
         //TODO: check that a ticket is actually saved in DB and Parking table is updated with availability
@@ -112,27 +119,33 @@ public class ParkingDataBaseIT {
      *
      * @throws Exception the exception
      */
+    @DisplayName("")
     @Test
     public void testParkingLotExit() throws Exception {
-        /**
+        /*
          * Given a new parking service
          */
         testParkingACar();
          parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
-        /**
+        /*
          * When the exiting process is called
          */
         Thread.sleep(1000);
         parkingService.processExitingVehicle();
-        /**
+        /*
          * Then : check that the fare generated and out time are populated correctly in the database
          */
         Ticket ticket = ticketDAO.getTicket(inputReaderUtil.readVehicleRegistrationNumber());
         ticket.setPrice(Fare.CAR_RATE_PER_HOUR);
-        /*******************Fare****/
+        /*******************************************************
+        /******************* Fare Generated ********************
+        /******************************************************/
         ticketDAO.updateTicket(ticket);
         assertEquals(Fare.CAR_RATE_PER_HOUR, ticket.getPrice());
-        /*******************Time-Out****/
+
+        /********************************************************
+        ******************Test Out time on DBB ******************
+        ********************************************************/
         assertNotNull(ticket.getOutTime());
 
 
@@ -140,9 +153,45 @@ public class ParkingDataBaseIT {
 
 
     }
+    @DisplayName("")
     @Test
-    public void testReccurentUserExiting_true() {}
+    public void testRecurentUserExiting_true() {
+        /*
+        Given
+        */
+       parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
 
+       /*
+       When
+       */
+        parkingService.processIncomingVehicle();
+        parkingService.processExitingVehicle();
+        boolean recurrentUserTest = ticketDAO.isRecurrentUser("ABCDEF");
+
+        /*
+        Then
+         */
+        assertTrue(recurrentUserTest);
+    }
+    @DisplayName("")
     @Test
-    public void testReccurentUserExiting_false(){}
+    public void testRecurentUserExiting_false(){
+
+        /*
+        Given
+        */
+            parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+
+       /*
+       When
+       */
+            parkingService.processIncomingVehicle();
+            parkingService.processExitingVehicle();
+            boolean recurrentUserTest = ticketDAO.isRecurrentUser("123456");
+
+        /*
+        Then
+         */
+            assertFalse(recurrentUserTest);
+    }
 }

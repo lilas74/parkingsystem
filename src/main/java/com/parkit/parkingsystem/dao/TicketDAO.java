@@ -103,17 +103,19 @@ public class TicketDAO {
             ps.setString(1, VehicleRegNumber);
             ResultSet rs = ps.executeQuery();
             while ( rs.next() ) {
-                count++;
+                count= rs.getInt(1);
             }
             if ( count >= 1 ) {
                 reccurentUser = true;
-               /* ticket = new Ticket();
-                ticket.setRecurrentUser(reccurentUser);*/
+                System.out.println("Welcome back! As a recurring user of our parking lot, you'll benefit from a 5% discount.");
+                ticket = new Ticket();
+                ticket.setRecurrentUser(reccurentUser);
+
             }
             dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
         } catch (Exception ex) {
-            logger.error("Error to find info", ex);
+            logger.error("Error to fetch user information", ex);
         } finally {
 
             dataBaseConfig.closeConnection(con);
