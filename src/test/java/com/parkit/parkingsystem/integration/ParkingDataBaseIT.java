@@ -17,6 +17,8 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -70,7 +72,7 @@ public class ParkingDataBaseIT {
      *
      * @throws Exception the exception
      */
-    @DisplayName("Test the process of parking a car ")
+    @DisplayName("Test to verify if a ticket is actually saved in DB and Parking table is updated with availability")
     @Test
     public void testParkingACar() throws Exception {
         /**
@@ -119,7 +121,7 @@ public class ParkingDataBaseIT {
      *
      * @throws Exception the exception
      */
-    @DisplayName("")
+    @DisplayName("Test to verify that the fare generated and out time are populated correctly in the database")
     @Test
     public void testParkingLotExit() throws Exception {
         /*
@@ -153,45 +155,51 @@ public class ParkingDataBaseIT {
 
 
     }
-    @DisplayName("")
+    @DisplayName("Test to verify if the recurrent user is set in the database as a recurent after an incoming process and  an exit process then a new incoming")
     @Test
-    public void testRecurentUserExiting_true() {
+    public void testRecurentUserExiting_true()throws Exception{
         /*
-        Given
+        Given a new parking service
         */
        parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
 
        /*
-       When
+       When a process incoming and a exiting process are completed
        */
+        Date inTime = new Date();
+        inTime.setTime(System.currentTimeMillis() - (60 * 60 * 1000));
         parkingService.processIncomingVehicle();
+        Thread.sleep(100);
         parkingService.processExitingVehicle();
+        Thread.sleep(100);
+        parkingService.processIncomingVehicle();
         boolean recurrentUserTest = ticketDAO.isRecurrentUser("ABCDEF");
 
         /*
-        Then
+        Then verify the customer become a recurrent user
          */
         assertTrue(recurrentUserTest);
     }
-    @DisplayName("")
+    @DisplayName("Test to verify if the recurrent user is not a recurent user if the incoming and exiting process should done once")
     @Test
     public void testRecurentUserExiting_false(){
 
         /*
-        Given
+        Given a new parking service
         */
             parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
 
        /*
-       When
+       When a process incoming and exiting are complete
        */
             parkingService.processIncomingVehicle();
             parkingService.processExitingVehicle();
-            boolean recurrentUserTest = ticketDAO.isRecurrentUser("123456");
 
         /*
-        Then
+        Then verify a the customer is not save as a recurent user
          */
-            assertFalse(recurrentUserTest);
+            boolean recurrentUserTest = ticketDAO.isRecurrentUser("123456");
+            assertFalse(recurrentUserTest,
+                    "The first time user is set as a recurent user instead of false");
     }
 }

@@ -64,12 +64,12 @@ public class ParkingServiceTest {
     @DisplayName( "Test the exiting process of any Vehicle" )
     @Test
     public void processExitingVehicleTest() {
-        /**
+        /*
          * Given: an user want to exit his vehicle from the parking
          */
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
 
-/**
+/*
  * When a ticket is set
  */
         Ticket ticket = new Ticket();
@@ -80,7 +80,7 @@ public class ParkingServiceTest {
         when(ticketDAO.updateTicket(any(Ticket.class))).thenReturn(true);
         parkingService.processExitingVehicle();
 
-        /**
+        /*
          * Then verify the system update parking spot available
          */
         verify(parkingSpotDAO, Mockito.times(1)).updateParking(any(ParkingSpot.class));
@@ -93,12 +93,12 @@ public class ParkingServiceTest {
     @DisplayName( "Test the incoming car process to verify if the parkingSpot is update and the ticket saved" )
     @Test
     public void processIncomingCarTest() {
-        /**
+        /*
          * Given: an user want to park his car in the parking
          */
         when(inputReaderUtil.readSelection()).thenReturn(1);
 
-        /**
+        /*
          * When the same user get any spot and the parking process for incoming car is done
          */
         when(parkingSpotDAO.getNextAvailableSlot((ParkingType.CAR))).thenReturn(1);
@@ -109,7 +109,7 @@ public class ParkingServiceTest {
         ticket.setInTime(inTime);
         parkingService.processIncomingVehicle();
 
-        /**
+        /*
          * Then verify the parkingSpot is update and the ticket saved in DAO
          */
         verify(parkingSpotDAO, Mockito.times(1)).updateParking(any(ParkingSpot.class));
@@ -122,18 +122,18 @@ public class ParkingServiceTest {
     @DisplayName( "Test of the incoming bike process to verify if the parkingSpot is update and the ticket saved" )
     @Test
     public void processIncomingBikeTest() {
-        /**
+        /*
          * Given: an user want to park his bike in the parking
          */
         when(inputReaderUtil.readSelection()).thenReturn(2);
         when(parkingSpotDAO.getNextAvailableSlot((ParkingType.BIKE))).thenReturn(4);
 
-        /**
+        /*
          * When the same user get any spot and the parking process for incoming car is done
          */
         parkingService.processIncomingVehicle();
 
-        /**
+        /*
          * Then verify the parkingSpot is update and the ticket saved in DAO
          */
         verify(parkingSpotDAO, Mockito.times(1)).updateParking(any(ParkingSpot.class));
