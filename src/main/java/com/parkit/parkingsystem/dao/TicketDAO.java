@@ -103,7 +103,7 @@ public class TicketDAO {
             ps.setString(1, VehicleRegNumber);
             ResultSet rs = ps.executeQuery();
             while ( rs.next() ) {
-                count= rs.getInt(1);
+                count = rs.getInt(1);
             }
             if ( count >= 1 ) {
                 reccurentUser = true;
