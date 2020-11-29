@@ -13,12 +13,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 
+/**
+ * The type Ticket dao.
+ */
 public class TicketDAO {
 
     private static final Logger logger = LogManager.getLogger("TicketDAO");
 
+    /**
+     * The Data base config.
+     */
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
+    /**
+     * Save ticket boolean.
+     *
+     * @param ticket the ticket
+     * @return the boolean
+     */
     public boolean saveTicket(Ticket ticket) {
         Connection con = null;
         try {
@@ -41,6 +53,12 @@ public class TicketDAO {
         }
     }
 
+    /**
+     * Gets ticket.
+     *
+     * @param vehicleRegNumber the vehicle reg number
+     * @return the ticket
+     */
     public Ticket getTicket(String vehicleRegNumber) {
         Connection con = null;
         Ticket ticket = null;
@@ -59,7 +77,7 @@ public class TicketDAO {
                 ticket.setPrice(rs.getDouble(3));
                 ticket.setInTime(rs.getTimestamp(4));
                 ticket.setOutTime(rs.getTimestamp(5));
-            System.out.println(ticket.getId());
+                System.out.println(ticket.getId());
 
             }
             dataBaseConfig.closeResultSet(rs);
@@ -72,7 +90,13 @@ public class TicketDAO {
         }
     }
 
-   public boolean updateTicket(Ticket ticket) {
+    /**
+     * Update ticket boolean.
+     *
+     * @param ticket the ticket
+     * @return the boolean
+     */
+    public boolean updateTicket(Ticket ticket) {
         Connection con = null;
         try {
             con = dataBaseConfig.getConnection();
@@ -91,6 +115,12 @@ public class TicketDAO {
         return false;
     }
 
+    /**
+     * Is recurrent user boolean.
+     *
+     * @param VehicleRegNumber the vehicle reg number
+     * @return the boolean
+     */
     public boolean isRecurrentUser(String VehicleRegNumber) {
         Connection con = null;
         boolean reccurentUser = false;

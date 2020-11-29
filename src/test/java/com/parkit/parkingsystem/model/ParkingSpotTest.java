@@ -7,12 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
+ * The type Parking spot test.
+ *
  * @author lilas
  * @see ParkingType
- * @see ParkingSpot
- * The type Parking spot test.
+ * @see ParkingSpot The type Parking spot test.
  */
-@DisplayName("ParkingSpotTest")
+@DisplayName( "ParkingSpotTest" )
 public class ParkingSpotTest {
     /**
      * The Parking spot.
@@ -28,7 +29,7 @@ public class ParkingSpotTest {
         /**
          * Given Initialized Car ParkingSpot
          */
-        parkingSpot = new ParkingSpot(1, ParkingType.CAR,true);
+        parkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
 
         /**
          * When a parking spot is set
@@ -40,9 +41,9 @@ public class ParkingSpotTest {
         /**
          * Then verify ticket has the right information in all the getMethod()
          */
-        assertEquals(parkingSpot.getId(),1);
-        assertEquals(parkingSpot.getParkingType(),ParkingType.CAR);
-        assertEquals(parkingSpot.isAvailable(),false);
+        assertEquals(parkingSpot.getId(), 1);
+        assertEquals(parkingSpot.getParkingType(), ParkingType.CAR);
+        assertEquals(parkingSpot.isAvailable(), false);
     }
 
     /**
@@ -53,7 +54,7 @@ public class ParkingSpotTest {
         /**
          * Given Initialized Bike ParkingSpot
          */
-        parkingSpot = new ParkingSpot(1, ParkingType.BIKE,true);
+        parkingSpot = new ParkingSpot(1, ParkingType.BIKE, true);
 
         /**
          * When a parking spot is set
@@ -65,8 +66,8 @@ public class ParkingSpotTest {
         /**
          * Then verify ticket has the right information in all the getMethod()
          */
-        assertEquals(parkingSpot.getId(),4);
-        assertEquals(parkingSpot.getParkingType(),ParkingType.BIKE);
-        assertEquals(parkingSpot.isAvailable(),false);
+        assertEquals(parkingSpot.getId(), 4);
+        assertEquals(parkingSpot.getParkingType(), ParkingType.BIKE);
+        assertEquals(parkingSpot.isAvailable(), false);
     }
 }

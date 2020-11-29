@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The type Data base config test.
+ *
  * @author lilas
  * @see DataBaseConfig
  */

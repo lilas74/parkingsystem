@@ -3,7 +3,11 @@ package com.parkit.parkingsystem.config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * The type Data base config.
@@ -11,7 +15,11 @@ import java.sql.*;
  * @author lilas
  */
 public class DataBaseConfig {
-
+    /**
+     * This is the central interface in the log4j package.
+     * Most logging operations,except configuration,
+     * are done through this interface.
+     */
     private static final Logger logger = LogManager.getLogger("DataBaseConfig");
 
     /**
@@ -31,8 +39,9 @@ public class DataBaseConfig {
 
     /**
      * Close connection.
+     * Calling the method close on a Connection object
      *
-     * @param con the con
+     * @param Connection connection
      */
     public void closeConnection(Connection con) {
         if ( con != null ) {
@@ -64,7 +73,7 @@ public class DataBaseConfig {
     /**
      * Close result set.
      *
-     * @param ResultSet the rs
+     * @param rs
      */
     public void closeResultSet(ResultSet rs) {
         if ( rs != null ) {

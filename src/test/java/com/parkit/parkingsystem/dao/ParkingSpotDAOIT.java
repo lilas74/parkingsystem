@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The type Parking spot DAOIT.
+ *
  * @author lilas
  */
 class ParkingSpotDAOIT {

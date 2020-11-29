@@ -22,8 +22,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * @author lilas
- * The type Ticket DAO IT.
+ * The type Ticket daoit.
+ *
+ * @author lilas The type Ticket DAO IT.
  */
 @ExtendWith( MockitoExtension.class )
 @DisplayName( "Test for the Ticket DAO Integration" )
@@ -103,6 +104,7 @@ class TicketDAOIT {
         assertNotNull(getTicketSaved.getOutTime());
 
     }
+
     /**
      * Save ticket test .
      */
@@ -136,8 +138,8 @@ class TicketDAOIT {
          */
 
 
-        assertFalse("This test should return false",isSaved);
-        assertEquals(0,ticket.getId(),
+        assertFalse("This test should return false", isSaved);
+        assertEquals(0, ticket.getId(),
                 "this test should return 0 because the ticket should not be saved");
 
     }

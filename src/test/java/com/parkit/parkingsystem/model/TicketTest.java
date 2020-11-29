@@ -8,12 +8,13 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
+ * The type Ticket test.
+ *
  * @author lilas
  * @see Ticket
- * @see ParkingSpot
- * The type Ticket test.
+ * @see ParkingSpot The type Ticket test.
  */
-@DisplayName("TicketModelTest")
+@DisplayName( "TicketModelTest" )
 public class TicketTest {
     /**
      * The Ticket.
@@ -30,8 +31,8 @@ public class TicketTest {
     @Test
     public void testTicket() {
         /**
-        * Given Initialized Ticket.
-        */
+         * Given Initialized Ticket.
+         */
         ticket = new Ticket();
         Date inTime = new Date();
         inTime.setTime(System.currentTimeMillis() - (60 * 60 * 1000));
@@ -39,7 +40,7 @@ public class TicketTest {
 
         /**
          * When a ticket is set
-          */
+         */
         ticket.setRecurrentUser(false);
         ticket.setId(1234);
         ticket.setInTime(inTime);
