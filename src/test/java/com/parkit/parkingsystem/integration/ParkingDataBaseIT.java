@@ -178,7 +178,7 @@ public class ParkingDataBaseIT {
         parkingService.processIncomingVehicle();
         Thread.sleep(100);
         parkingService.processExitingVehicle();
-        Thread.sleep(100);
+        Thread.sleep(1000);
         parkingService.processIncomingVehicle();
         boolean recurrentUserTest = ticketDAO.isRecurrentUser("ABCDEF");
 
