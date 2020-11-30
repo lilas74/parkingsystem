@@ -174,12 +174,14 @@ public class ParkingDataBaseIT {
        When a process incoming and a exiting process are completed
        */
         Date inTime = new Date();
-        inTime.setTime(System.currentTimeMillis() - (60 * 60 * 1000));
+        inTime.setTime(System.currentTimeMillis());
         parkingService.processIncomingVehicle();
-        Thread.sleep(100);
+        Thread.sleep(1000);
         parkingService.processExitingVehicle();
         Thread.sleep(1000);
         parkingService.processIncomingVehicle();
+        Thread.sleep(1000);
+        parkingService.processExitingVehicle();
         boolean recurrentUserTest = ticketDAO.isRecurrentUser("ABCDEF");
 
         /*
