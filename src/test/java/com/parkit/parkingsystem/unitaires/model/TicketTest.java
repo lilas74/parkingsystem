@@ -1,5 +1,7 @@
-package com.parkit.parkingsystem.model;
+package com.parkit.parkingsystem.unitaires.model;
 
+import com.parkit.parkingsystem.model.ParkingSpot;
+import com.parkit.parkingsystem.model.Ticket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

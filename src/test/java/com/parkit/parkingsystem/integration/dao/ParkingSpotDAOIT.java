@@ -1,4 +1,4 @@
-package com.parkit.parkingsystem.dao;
+package com.parkit.parkingsystem.integration.dao;
 
 import com.parkit.parkingsystem.constants.ParkingType;
 import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;

@@ -1,5 +1,6 @@
-package com.parkit.parkingsystem.config;
+package com.parkit.parkingsystem.unitaires.config;
 
+import com.parkit.parkingsystem.config.DataBaseConfig;
 import com.parkit.parkingsystem.constants.DBConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

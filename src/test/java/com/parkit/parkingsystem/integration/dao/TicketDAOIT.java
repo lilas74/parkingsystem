@@ -1,4 +1,4 @@
-package com.parkit.parkingsystem.dao;
+package com.parkit.parkingsystem.integration.dao;
 
 import com.parkit.parkingsystem.constants.Fare;
 import com.parkit.parkingsystem.constants.ParkingType;
