@@ -51,7 +51,7 @@ public class ParkingSpotTest {
      * Test bike parking spot.
      */
     @Test
-    public void testBikeParkingSpot() {
+    public void testBikeParkingSpot() throws Exception {
         /**
          * Given Initialized Bike ParkingSpot
          */
@@ -70,5 +70,10 @@ public class ParkingSpotTest {
         assertEquals(parkingSpot.getId(), 4);
         assertEquals(parkingSpot.getParkingType(), ParkingType.BIKE);
         assertEquals(parkingSpot.isAvailable(), false);
+    }
+    @Test
+    public void testHashMethod(){
+        parkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
+        assertEquals(parkingSpot.hashCode(),1);
     }
 }

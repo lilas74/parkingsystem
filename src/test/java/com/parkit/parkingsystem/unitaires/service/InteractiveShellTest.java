@@ -4,6 +4,9 @@ import com.parkit.parkingsystem.service.InteractiveShell;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.*;
 
@@ -14,14 +17,19 @@ import static org.hamcrest.core.StringContains.containsString;
 /**
  * The type Interactive shell test.
  */
+
+@ExtendWith( MockitoExtension.class )
 public class InteractiveShellTest  {
     /**
      * The Interactive shell.
      */
-    InteractiveShell interactiveShell ;
+
     InputStream inputStream ;
     OutputStream outputStream ;
 
+
+    @Mock
+    private static InteractiveShell interactiveShell;
     @BeforeEach
     private void setUpPerTest() {
 
@@ -48,7 +56,6 @@ public class InteractiveShellTest  {
             interactiveShell.loadInterface();
 
             String out = outContent.toString();
-
 
             assertThat(out, containsString("3 Shutdown System"));
             inputStream.close();

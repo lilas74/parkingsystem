@@ -77,7 +77,7 @@ public class TicketDAO {
                 ticket.setPrice(rs.getDouble(3));
                 ticket.setInTime(rs.getTimestamp(4));
                 ticket.setOutTime(rs.getTimestamp(5));
-                System.out.println(ticket.getId());
+
 
             }
             dataBaseConfig.closeResultSet(rs);
