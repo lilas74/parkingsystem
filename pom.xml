@@ -82,7 +82,7 @@
             <artifactId>maven-site-plugin</artifactId>
             <version>3.9.0</version>
         </dependency>
-    </dependencies>
+        </dependencies>
 
     <build>
         <plugins>
@@ -173,6 +173,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 

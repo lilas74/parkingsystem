@@ -7,6 +7,7 @@ import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
 import com.parkit.parkingsystem.service.ParkingService;
 import com.parkit.parkingsystem.util.InputReaderUtil;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 /**
  * The type Parking Service test.
@@ -42,14 +48,14 @@ public class ParkingServiceTest {
 
 
         try {
-            Mockito.when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("ABCDEF");
+         // when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("ABCDEF");
             ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
             Ticket ticket = new Ticket();
             ticket.setInTime(new Date(System.currentTimeMillis() - (60 * 60 * 1000)));
             ticket.setParkingSpot(parkingSpot);
             ticket.setVehicleRegNumber("ABCDEF");
 
-            Mockito.when(parkingSpotDAO.updateParking(ArgumentMatchers.any(ParkingSpot.class))).thenReturn(true);
+            //when(parkingSpotDAO.updateParking(ArgumentMatchers.any(ParkingSpot.class))).thenReturn(true);
 
             parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         } catch (Exception e) {
@@ -63,10 +69,12 @@ public class ParkingServiceTest {
      */
     @DisplayName( "Test the exiting process of any Vehicle" )
     @Test
-    public void processExitingVehicleTest() {
+    public void processExitingVehicleTest() throws Exception{
         /*
          * Given: an user want to exit his vehicle from the parking
          */
+        when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("ABCDEF");
+        when(parkingSpotDAO.updateParking(ArgumentMatchers.any(ParkingSpot.class))).thenReturn(true);
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
 
         /*
@@ -76,8 +84,8 @@ public class ParkingServiceTest {
         ticket.setInTime(new Date(System.currentTimeMillis() - (60 * 60 * 1000)));
         ticket.setParkingSpot(parkingSpot);
         ticket.setVehicleRegNumber("ABCDEF");
-        Mockito.when(ticketDAO.getTicket(ArgumentMatchers.anyString())).thenReturn(ticket);
-        Mockito.when(ticketDAO.updateTicket(ArgumentMatchers.any(Ticket.class))).thenReturn(true);
+        when(ticketDAO.getTicket(ArgumentMatchers.anyString())).thenReturn(ticket);
+        when(ticketDAO.updateTicket(ArgumentMatchers.any(Ticket.class))).thenReturn(true);
         parkingService.processExitingVehicle();
 
         /*
@@ -96,13 +104,13 @@ public class ParkingServiceTest {
         /*
          * Given: an user want to park his car in the parking
          */
-        Mockito.when(inputReaderUtil.readSelection()).thenReturn(1);
+        when(inputReaderUtil.readSelection()).thenReturn(1);
 
         /*
          * When the same user get any spot and the parking process for incoming car is done
          */
-        Mockito.when(parkingSpotDAO.getNextAvailableSlot((ParkingType.CAR))).thenReturn(1);
-        Mockito.when(ticketDAO.saveTicket(ArgumentMatchers.any())).thenReturn(true);
+        when(parkingSpotDAO.getNextAvailableSlot((ParkingType.CAR))).thenReturn(1);
+        when(ticketDAO.saveTicket(ArgumentMatchers.any())).thenReturn(true);
         Date inTime = new Date();
         inTime.setTime(System.currentTimeMillis() - (60 * 60 * 1000));
         Ticket ticket = new Ticket();
@@ -125,8 +133,8 @@ public class ParkingServiceTest {
         /*
          * Given: an user want to park his bike in the parking
          */
-        Mockito.when(inputReaderUtil.readSelection()).thenReturn(2);
-        Mockito.when(parkingSpotDAO.getNextAvailableSlot((ParkingType.BIKE))).thenReturn(4);
+        when(inputReaderUtil.readSelection()).thenReturn(2);
+        when(parkingSpotDAO.getNextAvailableSlot((ParkingType.BIKE))).thenReturn(4);
 
         /*
          * When the same user get any spot and the parking process for incoming car is done
@@ -139,6 +147,51 @@ public class ParkingServiceTest {
         Mockito.verify(parkingSpotDAO, Mockito.times(1)).updateParking(ArgumentMatchers.any(ParkingSpot.class));
         Mockito.verify(ticketDAO, Mockito.times(1)).saveTicket(ArgumentMatchers.any(Ticket.class));
     }
+    @Test
+    @DisplayName("Test to verify an exception throws if the input is incorrect ")
+    public void getVehichleTypeWithIncorrectInputShouldReturnAnExceptionToGetType() throws NoSuchMethodException {
+        //ARRANGE
+        when(inputReaderUtil.readSelection()).thenReturn(10);
+        parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+
+
+        Method m = ParkingService.class.getDeclaredMethod("getVehichleType");
+        m.setAccessible(true);
+
+        assertThrows(InvocationTargetException.class,()->m.invoke(parkingService));
+
+            }
+            @DisplayName("Test to verify correct exception handling if the parking is full")
+            @Test
+        public void testToVerifyTheCorrectExceptionIfTheParkingIsFull(){
+                when(inputReaderUtil.readSelection()).thenReturn(2);
+                parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+                ParkingType parkingType = ParkingType.BIKE;
+                when(parkingSpotDAO.getNextAvailableSlot(parkingType)).thenReturn(0);
+                try {
+                    parkingService.getNextParkingNumberIfAvailable();
+                }
+                catch(Exception e) {
+                    String message = e.getMessage();
+                    Assert.assertTrue(message.contains("Error fetching next available parking slot"));
+                }
+            }
+    @Test
+    @DisplayName("Test to verify an exception throws if the input of vehichle type is incorrect ")
+    public void getVehichleTypeWithIncorrectInputShouldReturnAnExceptionForGettingTheNextAvailableSpot() {
+        //ARRANGE
+        when(inputReaderUtil.readSelection()).thenReturn(3);
+        parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+        try {
+            parkingService.getNextParkingNumberIfAvailable();
+        } catch (Exception e) {
+            String message = e.getMessage();
+            System.out.println(message);
+            Assert.assertTrue(message.contains("Error parsing user input for type of vehicle"));
+
+        }
+    }
+
 }
 
 
