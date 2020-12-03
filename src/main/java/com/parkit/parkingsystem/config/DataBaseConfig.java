@@ -3,7 +3,11 @@ package com.parkit.parkingsystem.config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * The type Data base config.
@@ -38,7 +42,7 @@ public class DataBaseConfig {
 	 * Close connection. Calling the method close on a Connection object
 	 *
 	 * @param con
-     *          connection to close
+	 *            connection to close
 	 */
 	public void closeConnection(Connection con) {
 		if (con != null) {
@@ -72,7 +76,7 @@ public class DataBaseConfig {
 	 * Close result set.
 	 *
 	 * @param rs
-     *          the resultSet to close
+	 *            the resultSet to close
 	 */
 	public void closeResultSet(ResultSet rs) {
 		if (rs != null) {

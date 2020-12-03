@@ -19,9 +19,10 @@ public class DBConstants {
 	 */
 	public static final String SAVE_TICKET = "insert into ticket(PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME) values(?,?,?,?,?)";
 	/*
-	  The constant UPDATE_TICKET.
+	 * The constant UPDATE_TICKET.
 	 */
-	//public static final String UPDATE_TICKET = "UPDATE ticket SET PRICE=?, OUT_TIME=? WHERE ID =?";
+	// public static final String UPDATE_TICKET = "UPDATE ticket SET PRICE=?,
+	// OUT_TIME=? WHERE ID =?";
 	/**
 	 * The constant UPDATE_TICKET2.
 	 */

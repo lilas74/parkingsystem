@@ -127,7 +127,6 @@ public class TicketDAO {
 		Connection con = null;
 		boolean reccurentUser = false;
 		int count = 0;
-		Ticket ticket;
 
 		try {
 			con = dataBaseConfig.getConnection();
@@ -136,13 +135,13 @@ public class TicketDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				count = rs.getInt(1);
+
 			}
 			if (count >= 1) {
 				reccurentUser = true;
+
 				System.out.println(
 						"Welcome back! As a recurring user of our parking lot, you'll benefit from a 5% discount.");
-
-
 
 			}
 			dataBaseConfig.closeResultSet(rs);
@@ -152,10 +151,9 @@ public class TicketDAO {
 		} finally {
 
 			dataBaseConfig.closeConnection(con);
+
+			return reccurentUser;
 		}
-        ticket = new Ticket();
-        ticket.setRecurrentUser(reccurentUser);
-		return reccurentUser;
 
 	}
 }
