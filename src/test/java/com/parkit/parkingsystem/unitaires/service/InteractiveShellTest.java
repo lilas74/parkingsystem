@@ -53,7 +53,7 @@ public class InteractiveShellTest  {
             inputStream = new ByteArrayInputStream(initialString.getBytes());
             System.setIn(inputStream);
 
-            interactiveShell.loadInterface();
+            InteractiveShell.loadInterface();
 
             String out = outContent.toString();
 
