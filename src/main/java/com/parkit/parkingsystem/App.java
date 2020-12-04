@@ -12,20 +12,20 @@ import com.parkit.parkingsystem.service.InteractiveShell;
  * @author lilas
  */
 class App {
-	/**
-	 * @param logger
-	 *            logger
-	 */
-	private static final Logger logger = LogManager.getLogger("App");
 
-	/**
-	 * Main.
-	 *
-	 * @param args
-	 *            the args
-	 */
-	public static void main(String[] args) {
-		logger.info("Initializing Parking System");
-		InteractiveShell.loadInterface();
-	}
+    /**
+     * The Constant logger.
+     *
+     */
+    private static final Logger logger = LogManager.getLogger("App");
+
+    /**
+     * Main.
+     *
+     * @param args the args
+     */
+    public static void main(String[] args) {
+	logger.info("Initializing Parking System");
+	InteractiveShell.loadInterface();
+    }
 }

@@ -7,144 +7,150 @@ import java.util.Date;
  */
 public class Ticket {
 
-	private boolean isRecurrentUser;
-	private int id;
-	private ParkingSpot parkingSpot;
-	private String vehicleRegNumber;
-	private double price;
-	private Date inTime;
-	private Date outTime;
+    /** The is recurrent user. */
+    private boolean isRecurrentUser;
 
-	/**
-	 * Gets id.
-	 *
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
+    /** The id. */
+    private int id;
 
-	/**
-	 * Sets id.
-	 *
-	 * @param id
-	 *            the id
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
+    /** The parking spot. */
+    private ParkingSpot parkingSpot;
 
-	/**
-	 * Gets parking spot.
-	 *
-	 * @return the parking spot
-	 */
-	public ParkingSpot getParkingSpot() {
-		return parkingSpot;
-	}
+    /** The vehicle reg number. */
+    private String vehicleRegNumber;
 
-	/**
-	 * Sets parking spot.
-	 *
-	 * @param parkingSpot
-	 *            the parking spot
-	 */
-	public void setParkingSpot(ParkingSpot parkingSpot) {
-		this.parkingSpot = parkingSpot;
-	}
+    /** The price. */
+    private double price;
 
-	/**
-	 * Gets vehicle reg number.
-	 *
-	 * @return the vehicle reg number
-	 */
-	public String getVehicleRegNumber() {
-		return vehicleRegNumber;
-	}
+    /** The in time. */
+    private Date inTime;
 
-	/**
-	 * Sets vehicle reg number.
-	 *
-	 * @param vehicleRegNumber
-	 *            the vehicle reg number
-	 */
-	public void setVehicleRegNumber(String vehicleRegNumber) {
-		this.vehicleRegNumber = vehicleRegNumber;
-	}
+    /** The out time. */
+    private Date outTime;
 
-	/**
-	 * Gets price.
-	 *
-	 * @return the price
-	 */
-	public double getPrice() {
-		return price;
-	}
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public int getId() {
+	return id;
+    }
 
-	/**
-	 * Sets price.
-	 *
-	 * @param price
-	 *            the price
-	 */
-	public void setPrice(double price) {
-		this.price = Math.round(price * 100.0) / 100.0;
-	}
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(int id) {
+	this.id = id;
+    }
 
-	/**
-	 * Gets in time.
-	 *
-	 * @return the in time
-	 */
-	public Date getInTime() {
-		return inTime;
-	}
+    /**
+     * Gets parking spot.
+     *
+     * @return the parking spot
+     */
+    public ParkingSpot getParkingSpot() {
+	return parkingSpot;
+    }
 
-	/**
-	 * Sets in time.
-	 *
-	 * @param inTime
-	 *            the in time
-	 */
-	public void setInTime(Date inTime) {
-		this.inTime = inTime;
-	}
+    /**
+     * Sets parking spot.
+     *
+     * @param parkingSpot the parking spot
+     */
+    public void setParkingSpot(ParkingSpot parkingSpot) {
+	this.parkingSpot = parkingSpot;
+    }
 
-	/**
-	 * Gets out time.
-	 *
-	 * @return the out time
-	 */
-	public Date getOutTime() {
-		return outTime;
-	}
+    /**
+     * Gets vehicle reg number.
+     *
+     * @return the vehicle reg number
+     */
+    public String getVehicleRegNumber() {
+	return vehicleRegNumber;
+    }
 
-	/**
-	 * Sets out time.
-	 *
-	 * @param outTime
-	 *            the out time
-	 */
-	public void setOutTime(Date outTime) {
-		this.outTime = outTime;
-	}
+    /**
+     * Sets vehicle reg number.
+     *
+     * @param vehicleRegNumber the vehicle reg number
+     */
+    public void setVehicleRegNumber(String vehicleRegNumber) {
+	this.vehicleRegNumber = vehicleRegNumber;
+    }
 
-	/**
-	 * Gets recurrent user.
-	 *
-	 * @return the recurrent user
-	 */
-	public boolean getRecurrentUser() {
-		return isRecurrentUser;
-	}
+    /**
+     * Gets price.
+     *
+     * @return the price
+     */
+    public double getPrice() {
+	return price;
+    }
 
-	/**
-	 * Sets recurrent user.
-	 *
-	 * @param recurrentUser
-	 *            the recurrent user
-	 */
-	public void setRecurrentUser(boolean recurrentUser) {
-		this.isRecurrentUser = recurrentUser;
-	}
+    /**
+     * Sets price.
+     *
+     * @param price the price
+     */
+    public void setPrice(double price) {
+	this.price = Math.round(price * 100.0) / 100.0;
+    }
+
+    /**
+     * Gets in time.
+     *
+     * @return the in time
+     */
+    public Date getInTime() {
+	return inTime;
+    }
+
+    /**
+     * Sets in time.
+     *
+     * @param inTime the in time
+     */
+    public void setInTime(Date inTime) {
+	this.inTime = inTime;
+    }
+
+    /**
+     * Gets out time.
+     *
+     * @return the out time
+     */
+    public Date getOutTime() {
+	return outTime;
+    }
+
+    /**
+     * Sets out time.
+     *
+     * @param outTime the out time
+     */
+    public void setOutTime(Date outTime) {
+	this.outTime = outTime;
+    }
+
+    /**
+     * Gets recurrent user.
+     *
+     * @return the recurrent user
+     */
+    public boolean getRecurrentUser() {
+	return isRecurrentUser;
+    }
+
+    /**
+     * Sets recurrent user.
+     *
+     * @param recurrentUser the recurrent user
+     */
+    public void setRecurrentUser(boolean recurrentUser) {
+	this.isRecurrentUser = recurrentUser;
+    }
 }

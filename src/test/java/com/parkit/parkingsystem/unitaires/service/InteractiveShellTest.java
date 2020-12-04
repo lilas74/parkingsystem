@@ -1,10 +1,6 @@
 package com.parkit.parkingsystem.unitaires.service;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.StringContains.containsString;
-
-import java.io.*;
-
+import com.parkit.parkingsystem.service.InteractiveShell;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +8,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.parkit.parkingsystem.service.InteractiveShell;
+import java.io.*;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.StringContains.containsString;
 
 /**
  * The type Interactive shell test.
@@ -20,44 +19,50 @@ import com.parkit.parkingsystem.service.InteractiveShell;
 
 @ExtendWith(MockitoExtension.class)
 public class InteractiveShellTest {
-	@Mock
-	private static InteractiveShell interactiveShell;
-	/**
-	 * The Interactive shell.
-	 */
 
-	InputStream inputStream;
-	OutputStream outputStream;
+    /** The interactive shell. */
+    @Mock
+    private static InteractiveShell interactiveShell;
+    /**
+     * The Interactive shell.
+     */
 
-	@BeforeEach
-	private void setUpPerTest() {
+    InputStream inputStream;
 
-		interactiveShell = new InteractiveShell();
-	}
+    /** The output stream. */
+    OutputStream outputStream;
 
-	/**
-	 * Load interface ans wer 3 test.
-	 *
-	 * @throws IOException
-	 *             the io exception
-	 */
-	@Test
-	@DisplayName("tests if the right message is displayed when enteing the app and leaving it right away")
-	public void loadInterfaceAnsWerTest() throws Exception {
-		// ARRANGE
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
+    /**
+     * Sets the up per test.
+     */
+    @BeforeEach
+    private void setUpPerTest() {
 
-		String initialString = "3\n";
-		inputStream = new ByteArrayInputStream(initialString.getBytes());
-		System.setIn(inputStream);
+	interactiveShell = new InteractiveShell();
+    }
 
-		InteractiveShell.loadInterface();
+    /**
+     * Load interface ans wer 3 test.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    @DisplayName("tests if the right message is displayed when enteing the app and leaving it right away")
+    public void loadInterfaceAnsWerTest() throws Exception {
+	// ARRANGE
+	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	System.setOut(new PrintStream(outContent));
 
-		String out = outContent.toString();
+	String initialString = "3\n";
+	inputStream = new ByteArrayInputStream(initialString.getBytes());
+	System.setIn(inputStream);
 
-		assertThat(out, containsString("3 Shutdown System"));
-		inputStream.close();
-	}
+	InteractiveShell.loadInterface();
+
+	String out = outContent.toString();
+
+	assertThat(out, containsString("3 Shutdown System"));
+	inputStream.close();
+    }
 
 }

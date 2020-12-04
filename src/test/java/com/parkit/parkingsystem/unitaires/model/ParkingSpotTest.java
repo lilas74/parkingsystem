@@ -1,12 +1,11 @@
 package com.parkit.parkingsystem.unitaires.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import com.parkit.parkingsystem.constants.ParkingType;
+import com.parkit.parkingsystem.model.ParkingSpot;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.parkit.parkingsystem.constants.ParkingType;
-import com.parkit.parkingsystem.model.ParkingSpot;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The type Parking spot test.
@@ -17,63 +16,69 @@ import com.parkit.parkingsystem.model.ParkingSpot;
  */
 @DisplayName("ParkingSpotTest")
 public class ParkingSpotTest {
+    /**
+     * The Parking spot.
+     */
+    ParkingSpot parkingSpot = null;
+
+    /**
+     * Test car parking spot.
+     */
+    @Test
+    public void testCarParkingSpot() {
 	/**
-	 * The Parking spot.
+	 * Given Initialized Car ParkingSpot
 	 */
-	ParkingSpot parkingSpot = null;
-
-	/**
-	 * Test car parking spot.
-	 */
-	@Test
-	public void testCarParkingSpot() {
-		/**
-		 * Given Initialized Car ParkingSpot
-		 */
-		parkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
-
-		/**
-		 * When a parking spot is set
-		 */
-		parkingSpot.setId(1);
-		parkingSpot.setParkingType(ParkingType.CAR);
-		parkingSpot.setAvailable(false);
-
-		/**
-		 * Then verify ticket has the right information in all the getMethod()
-		 */
-		assertEquals(parkingSpot.getId(), 1);
-		assertEquals(parkingSpot.getParkingType(), ParkingType.CAR);
-		assertEquals(parkingSpot.isAvailable(), false);
-	}
+	parkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
 
 	/**
-	 * Test bike parking spot.
+	 * When a parking spot is set
 	 */
-	@Test
-	public void testBikeParkingSpot() throws Exception {
-		/**
-		 * Given Initialized Bike ParkingSpot
-		 */
-		parkingSpot = new ParkingSpot(1, ParkingType.BIKE, true);
+	parkingSpot.setId(1);
+	parkingSpot.setParkingType(ParkingType.CAR);
+	parkingSpot.setAvailable(false);
 
-		/**
-		 * When a parking spot is set
-		 */
-		parkingSpot.setId(4);
-		parkingSpot.setParkingType(ParkingType.BIKE);
-		parkingSpot.setAvailable(false);
+	/**
+	 * Then verify ticket has the right information in all the getMethod()
+	 */
+	assertEquals(parkingSpot.getId(), 1);
+	assertEquals(parkingSpot.getParkingType(), ParkingType.CAR);
+	assertEquals(parkingSpot.isAvailable(), false);
+    }
 
-		/**
-		 * Then verify ticket has the right information in all the getMethod()
-		 */
-		assertEquals(parkingSpot.getId(), 4);
-		assertEquals(parkingSpot.getParkingType(), ParkingType.BIKE);
-		assertEquals(parkingSpot.isAvailable(), false);
-	}
-	@Test
-	public void testHashMethod() {
-		parkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
-		assertEquals(parkingSpot.hashCode(), 1);
-	}
+    /**
+     * Test bike parking spot.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testBikeParkingSpot() throws Exception {
+	/**
+	 * Given Initialized Bike ParkingSpot
+	 */
+	parkingSpot = new ParkingSpot(1, ParkingType.BIKE, true);
+
+	/**
+	 * When a parking spot is set
+	 */
+	parkingSpot.setId(4);
+	parkingSpot.setParkingType(ParkingType.BIKE);
+	parkingSpot.setAvailable(false);
+
+	/**
+	 * Then verify ticket has the right information in all the getMethod()
+	 */
+	assertEquals(parkingSpot.getId(), 4);
+	assertEquals(parkingSpot.getParkingType(), ParkingType.BIKE);
+	assertEquals(parkingSpot.isAvailable(), false);
+    }
+
+    /**
+     * Test hash method.
+     */
+    @Test
+    public void testHashMethod() {
+	parkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
+	assertEquals(parkingSpot.hashCode(), 1);
+    }
 }
