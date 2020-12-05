@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 /**
  * The type Ticket dao.
  */
+@SuppressWarnings("All")
 public class TicketDAO {
 
     /** The Constant logger. */

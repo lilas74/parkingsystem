@@ -10,6 +10,7 @@ import com.parkit.parkingsystem.util.InputReaderUtil;
 /**
  * The type Interactive shell.
  */
+@SuppressWarnings("ALL")
 public class InteractiveShell {
 
     /** The Constant logger. */
@@ -18,7 +19,7 @@ public class InteractiveShell {
     /**
      * Load interface.
      */
-    @SuppressWarnings( "UnnecessaryCodeBlock" )
+    @SuppressWarnings("UnnecessaryCodeBlock")
 	public static void loadInterface() {
 	logger.info("App initialized!!!");
 	System.out.println("Welcome to Parking System!");
