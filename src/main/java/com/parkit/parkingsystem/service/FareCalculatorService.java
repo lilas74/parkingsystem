@@ -23,10 +23,10 @@ public class FareCalculatorService {
         long inHour = ticket.getInTime().getTime();
         long outHour = ticket.getOutTime().getTime();
         long convInHour = 60 * 60 * 1000;
-        double coefReduction = 0.95;
-        double freeDuration = 0.5;
+        final double coefReduction = 0.95;
+        final double freeDuration = 0.5;
 
-        /* TODO: Some tests are failing here. Need to check if this logic is correct */
+        //TODO: Some tests are failing here. Need to check if this logic is correct
         double duration = (double) (outHour - inHour) / convInHour;
 
         switch (ticket.getParkingSpot().getParkingType()) {

@@ -23,7 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SuppressWarnings("UnusedAssignment")
 class DataBaseConfigTest {
 
-    /** The test config. */
+    /**
+	 * The test config.
+	 */
     private static DataBaseConfig testConfig;
 
     /**

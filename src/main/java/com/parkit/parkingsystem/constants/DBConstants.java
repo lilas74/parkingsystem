@@ -26,7 +26,7 @@ public class DBConstants {
     /**
      * The constant UPDATE_TICKET2.
      */
-    public static final String UPDATE_TICKET2 = "update ticket set PRICE=?, OUT_TIME=? where OUT_TIME IS NULL  and ID=?";
+    public static final String UPDATE_TICKET2 = "update ticket set PRICE=?, OUT_TIME=? where OUT_TIME IS NULL and ID=?";
 
     /**
      * The constant GET_TICKET.
