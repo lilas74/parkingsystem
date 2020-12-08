@@ -40,7 +40,7 @@ public class DBConstantsTest {
     @DisplayName("Verify DBConstants are set corretly")
     @Test
     public void VerifyDBConstantAreSetCorrectlyForUpdateTicketRequest() {
-	String result = "update ticket set PRICE=?, OUT_TIME=? where OUT_TIME IS NULL  and ID=?";
+	String result = "update ticket set PRICE=?, OUT_TIME=? where OUT_TIME IS NULL and ID=?";
 
 	Assertions.assertEquals(result, DBConstants.UPDATE_TICKET2);
     }
